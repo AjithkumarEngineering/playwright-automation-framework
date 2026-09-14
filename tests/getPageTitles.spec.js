@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 
-test('simpleexample' , async ({page})=>
+test.only('simpleexample' , async ({page})=>
 {
 
     const login = await page.goto("https://rahulshettyacademy.com/client");
@@ -22,6 +22,7 @@ test('practices to get titiles', async ({browser})=>
 {
     const context= await browser.newContext();
     const page =  await context.newPage();
+    await page.waitForEvent('load');
     const login = await page.goto("https://rahulshettyacademy.com/client");
     const username = await page.locator('//*[@id="userEmail"]').fill("ajithkumarengineering@gmail.com");
     const pswd= await page.locator('//*[@id="userPassword"]').fill("Rahulshetty@4001");

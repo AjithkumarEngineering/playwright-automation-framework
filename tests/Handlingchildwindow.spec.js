@@ -14,7 +14,7 @@ test('Handling child windows', async ({browser})=>{
     const [NewPage] = await Promise.all([
     
        context.waitForEvent('page'),
-       documentLink.click(),
+      await documentLink.click(),
 
     ])
    
