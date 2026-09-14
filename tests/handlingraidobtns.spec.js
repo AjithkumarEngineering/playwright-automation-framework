@@ -1,7 +1,7 @@
 import {test , expect} from '@playwright/test';
 import { sign } from 'node:crypto';
 
-test.only('Handling Radiobtns', async ({page})=>{
+test('Handling Radiobtns', async ({page})=>{
 
    
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/", {

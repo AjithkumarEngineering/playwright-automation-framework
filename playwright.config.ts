@@ -1,4 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'node:path';
+
+dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.TEST_ENV ?? 'dev'}`) });
+dotenv.config();
 
 /**
  * Read environment variables from file.
@@ -11,8 +16,9 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config =({
+const config = defineConfig({
   testDir: './tests',
+  testMatch: '**/*.framework.spec.ts',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,18 +29,23 @@ const config =({
   workers: process.env.CI ? 1 : undefined,
   
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout:30*1000,
+    timeout: 30 * 1000,
   expect:{
-     timeout: 45*100,
+      timeout: 5 * 1000,
   },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
- reporter: [['html', { open: 'on-failure', port: 9500 }]],
+ reporter: [
+    ['list'],
+    ['html', { open: 'on-failure', outputFolder: 'playwright-report' }],
+    ['allure-playwright', { resultsDir: 'allure-results' }],
+  ],
 
   use: {
-    browserName: 'chromium',
-    headless: false,
-    // baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL ?? 'https://rahulshettyacademy.com',
+    headless: process.env.HEADLESS !== 'false',
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -44,15 +55,15 @@ const config =({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
@@ -83,4 +94,4 @@ const config =({
   // },
 });
 
-module.exports = config
+export default config;

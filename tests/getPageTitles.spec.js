@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 
-test.only ('simpleexample' , async ({page})=>
+test('simpleexample' , async ({page})=>
 {
 
     const login = await page.goto("https://rahulshettyacademy.com/client");

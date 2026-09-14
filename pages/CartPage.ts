@@ -1,0 +1,13 @@
+import { expect, type Page } from '@playwright/test';
+
+export class CartPage {
+  constructor(private readonly page: Page) {}
+
+  async expectProduct(productName: string): Promise<void> {
+    await expect(this.page.locator('.cartSection').filter({ hasText: productName })).toBeVisible();
+  }
+
+  async checkout(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Checkout' }).click();
+  }
+}

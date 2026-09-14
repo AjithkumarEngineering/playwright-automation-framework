@@ -1,6 +1,6 @@
 import {test , expect} from '@playwright/test';
 
-test.only('Handling child windows', async ({browser})=>{
+test('Handling child windows', async ({browser})=>{
     
     const context = await browser.newContext(); 
     const page = await context.newPage();
