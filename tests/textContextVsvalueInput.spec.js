@@ -1,6 +1,6 @@
 import {test , expect} from '@playwright/test';
 
-test.only('Handling child windows', async ({browser})=>{
+test('Handling child windows', async ({browser})=>{
     
     const context = await browser.newContext(); 
     const page = await context.newPage();
@@ -19,7 +19,7 @@ test.only('Handling child windows', async ({browser})=>{
     ])
    
 
-    const text = await NewPage.locator(".red").first().textContent();
+    const text = (await NewPage.locator(".red").first().textContent()) ?? '';
      console.log(text);
     const arrayText= text.split("@");
     console.log(arrayText);
@@ -27,8 +27,6 @@ test.only('Handling child windows', async ({browser})=>{
     console.log(domain);
    await NewPage.close();
    await page.locator("#username").fill(domain);
-   await page.pause();
    console.log(await page.locator("#username").inputValue());
   // console.log(await page.locator("#username").textContent());
-    // await page.pause();
 });

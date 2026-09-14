@@ -4,8 +4,8 @@ test('simpleexample' , async ({page})=>
 {
 
     const login = await page.goto("https://rahulshettyacademy.com/client");
-    const username = await page.locator('//*[@id="userEmail"]').fill("ajithkumarengineering@gmail.com");
-    const pswd= await page.locator('//*[@id="userPassword"]').fill("Rahulshetty@4001");
+    const username = await page.locator('//*[@id="userEmail"]').fill(process.env.TEST_EMAIL ?? '');
+    const pswd= await page.locator('//*[@id="userPassword"]').fill(process.env.TEST_PASSWORD ?? '');
     const loginbtn=await page.locator('//*[@id="login"]').click();
     // await page.waitForLoadState('networkidle');
     //otherrmethod to get titiles
@@ -23,8 +23,8 @@ test('practices to get titiles', async ({browser})=>
     const context= await browser.newContext();
     const page =  await context.newPage();
     const login = await page.goto("https://rahulshettyacademy.com/client");
-    const username = await page.locator('//*[@id="userEmail"]').fill("ajithkumarengineering@gmail.com");
-    const pswd= await page.locator('//*[@id="userPassword"]').fill("Rahulshetty@4001");
+    const username = await page.locator('//*[@id="userEmail"]').fill(process.env.TEST_EMAIL ?? '');
+    const pswd= await page.locator('//*[@id="userPassword"]').fill(process.env.TEST_PASSWORD ?? '');
     const loginbtn=await page.locator('//*[@id="login"]').click();
     const getpageTtiles = await page.locator("//p[text()='Automation Practice']").textContent();
     await console.log(getpageTtiles);
@@ -32,7 +32,6 @@ test('practices to get titiles', async ({browser})=>
     const allTtiles = await page.locator("//div[contains(@class, 'card-body')]").first().allTextContents();
     await console.log(getTtiles);
     await console.log(allTtiles);
-    context.close();
-    page.close();
+    await context.close();
     
 });
