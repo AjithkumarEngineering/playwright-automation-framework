@@ -7,8 +7,8 @@ test ('ordertheproduct', async ({page})=>{
     const login =await page.goto("https://rahulshettyacademy.com/client", {
     waitUntil: "domcontentloaded"
     });
-    const username = await page.locator('//*[@id="userEmail"]').fill(process.env.TEST_EMAIL ?? '');
-    const pswd= await page.locator('//*[@id="userPassword"]').fill(process.env.TEST_PASSWORD ?? '');
+    const username = await page.locator('//*[@id="userEmail"]').fill("ajithkumarengineering@gmail.com");
+    const pswd= await page.locator('//*[@id="userPassword"]').fill("Rahulshetty@4001");
     const loginbtn=await page.locator('//*[@id="login"]').click();
     await page.locator(".card-body b").first().waitFor();
     const allTtiles = await page.locator(".card-body b").allTextContents();
@@ -52,5 +52,6 @@ test ('ordertheproduct', async ({page})=>{
     // await page.getByText('Place Order').click();
     // const toastMsg = await page.locator('.toast-title').textContent();
     // console.log("pop Up Msg:", toastMsg);
+    await page.pause();
 
 });
