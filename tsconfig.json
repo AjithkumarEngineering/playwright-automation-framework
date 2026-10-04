@@ -11,5 +11,5 @@
   "include": [
     "tests/**/*.ts",
     "playwright.config.ts"
-  ]
+, "tests/cart.spec.js"  ]
 }
